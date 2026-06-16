@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PARALLAX | VOID</title>
+    <title>PARALLAX // OFFICIAL</title>
     <style>
-        /* --- RESET & EXPERIMENTAL DARK AESTHETIC --- */
+        /* --- HIGH FASHION / BRUTALIST BASE --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: crosshair; /* Aesthetic choice */
+            cursor: none; /* Hides default cursor to use custom interactive element */
         }
 
         body, html {
             width: 100%;
             height: 100%;
-            background-color: #050505;
+            background-color: #000000;
             color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             overflow: hidden;
-            letter-spacing: 0.15em;
+            font-weight: 300;
         }
 
-        /* --- BACKGROUND LAYER --- */
-        #bgCanvas {
+        /* --- THE INTERACTIVE MATRIX CANVAS --- */
+        #vortexCanvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -33,272 +33,277 @@
             z-index: 1;
         }
 
-        /* --- INTERACTIVE CENTERpiece --- */
-        .main-container {
-            position: relative;
-            z-index: 2;
+        /* --- FIXED SCREEN UI CORNERS --- */
+        .ui-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            padding: 60px 40px;
+            z-index: 10;
+            pointer-events: none; /* Allows canvas interactions underneath */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            padding: 40px;
         }
 
-        /* --- TOP NAVIGATION --- */
-        header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .ui-element {
+            pointer-events: auto; /* Re-enables clicking for links */
         }
 
-        .logo {
-            font-size: 1.1rem;
-            font-weight: 800;
+        /* Top Left: Logo */
+        .corner-top-left {
+            grid-column: 1;
+            grid-row: 1;
+            align-self: start;
+            justify-self: start;
+        }
+        
+        .brand-name {
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 0.6rem;
             text-transform: uppercase;
             text-decoration: none;
             color: #fff;
-            mix-blend-mode: difference;
         }
 
-        .store-link {
-            font-size: 0.75rem;
-            text-transform: uppercase;
+        /* Top Right: Premium Store Capsule */
+        .corner-top-right {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: start;
+            justify-self: end;
+        }
+
+        .store-pill {
             text-decoration: none;
-            color: #000;
-            background-color: #fff;
-            padding: 10px 24px;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .store-link:hover {
-            transform: scale(1.05);
-        }
-
-        /* --- CENTER VISUAL --- */
-        .interactive-hero {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            max-width: 500px;
-            height: 500px;
-        }
-
-        .visualizer-ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .center-title {
-            position: absolute;
-            font-size: clamp(2rem, 6vw, 4.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.4em;
-            margin-right: -0.4em;
-            pointer-events: none;
-            mix-blend-mode: difference;
-            text-shadow: 0 0 20px rgba(255,255,255,0.1);
-        }
-
-        /* --- FOOTER SOCIAL LINKS --- */
-        footer {
-            width: 100%;
-        }
-
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            gap: clamp(15px, 4vw, 40px);
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 28px;
             font-size: 0.7rem;
             text-transform: uppercase;
-            text-decoration: none;
-            color: #fff;
-            opacity: 0.4;
-            transition: opacity 0.3s ease;
+            letter-spacing: 0.2rem;
+            border-radius: 100px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
         }
 
-        .nav-links a:hover {
+        .store-pill:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Bottom Left: Concept Tag */
+        .corner-bottom-left {
+            grid-column: 1;
+            grid-row: 2;
+            align-self: end;
+            justify-self: start;
+        }
+
+        .meta-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            opacity: 0.3;
+        }
+
+        /* Bottom Right: Clean Social Stack */
+        .corner-bottom-right {
+            grid-column: 2;
+            grid-row: 2;
+            align-self: end;
+            justify-self: end;
+        }
+
+        .social-list {
+            list-style: none;
+            text-align: right;
+        }
+
+        .social-list li {
+            margin-top: 8px;
+        }
+
+        .social-list a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.75rem;
+            letter-spacing: 0.1rem;
+            opacity: 0.4;
+            transition: opacity 0.2s;
+        }
+
+        .social-list a:hover {
             opacity: 1;
         }
 
-        /* Mobile specific styling adjustments */
-        @media (max-width: 600px) {
-            .main-container { padding: 40px 20px; }
-            header { flex-direction: column; gap: 20px; }
-            .interactive-hero { max-width: 280px; height: 280px; }
+        /* --- CUSTOM MONOCHROME CURSOR --- */
+        #customCursor {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 100;
+            mix-blend-mode: difference;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        body:active #customCursor {
+            width: 25px;
+            height: 25px;
+        }
+
+        /* Responsive UI layout scaling */
+        @media (max-width: 768px) {
+            .ui-layer { padding: 20px; grid-template-columns: 1fr; grid-template-rows: auto auto 1fr; gap: 30px; }
+            .corner-top-right { grid-column: 1; grid-row: 2; justify-self: start; }
+            .corner-bottom-left { display: none; }
+            .corner-bottom-right { grid-column: 1; grid-row: 3; justify-self: start; }
+            .social-list { text-align: left; }
+            * { cursor: auto; } #customCursor { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Galaxy / Nebula Background Canvas -->
-    <canvas id="bgCanvas"></canvas>
+    <!-- Target Follower / Pointer -->
+    <div id="customCursor"></div>
 
-    <div class="main-container">
-        <header>
-            <a href="#" class="logo">P A R A L L A X</a>
-            <a href="https://boundless-official-store.printify.me/" target="_blank" class="store-link">Shop Hub</a>
-        </header>
+    <!-- The Liquid Cosmic Canvas -->
+    <canvas id="vortexCanvas"></canvas>
 
-        <!-- Center Interactive Core -->
-        <div class="interactive-hero">
-            <canvas id="ringCanvas" class="visualizer-ring"></canvas>
-            <div class="center-title">PARALLAX</div>
+    <!-- UI Overlay Layout -->
+    <div class="ui-layer">
+        
+        <div class="ui-element corner-top-left">
+            <a href="#" class="brand-name">PARALLAX</a>
         </div>
 
-        <footer>
-            <ul class="nav-links">
-                <li><a href="https://www.instagram.com/parallax.x.x?igsh=eTlnM20xZW5lcDUx&utm_source=qr" target="_blank">// Instagram</a></li>
-                <li><a href="https://m.youtube.com/@parallax.x.x?ra=m" target="_blank">// YouTube</a></li>
-                <li><a href="https://x.com/Parallax_x_x" target="_blank">// X</a></li>
-                <li><a href="https://www.facebook.com/Parallax.x.x.x.x/" target="_blank">// Facebook</a></li>
-                <li><a href="https://www.tiktok.com/@parallax.x.x?_r=1&_t=ZT-94UGGvXVNug" target="_blank">// TikTok</a></li>
-                <li><a href="https://discord.com/invite/rhXuzGvM6" target="_blank">// Discord</a></li>
+        <div class="ui-element corner-top-right">
+            <a href="https://boundless-official-store.printify.me/" target="_blank" class="store-pill">Official Store</a>
+        </div>
+
+        <div class="ui-element corner-bottom-left">
+            <div class="meta-tag">SYSTEM // METALLIC VOID</div>
+        </div>
+
+        <div class="ui-element corner-bottom-right">
+            <ul class="social-list">
+                <li><a href="https://www.instagram.com/parallax.x.x?igsh=eTlnM20xZW5lcDUx&utm_source=qr" target="_blank">INSTAGRAM</a></li>
+                <li><a href="https://m.youtube.com/@parallax.x.x?ra=m" target="_blank">YOUTUBE</a></li>
+                <li><a href="https://x.com/Parallax_x_x" target="_blank">X.COM</a></li>
+                <li><a href="https://www.facebook.com/Parallax.x.x.x.x/" target="_blank">FACEBOOK</a></li>
+                <li><a href="https://www.tiktok.com/@parallax.x.x?_r=1&_t=ZT-94UGGvXVNug" target="_blank">TIKTOK</a></li>
+                <li><a href="https://discord.com/invite/rhXuzGvM6" target="_blank">DISCORD</a></li>
             </ul>
-        </footer>
+        </div>
+
     </div>
 
+    <!-- HIGH-INTERACTIVE LIQUID VORTEX SCRIPT -->
     <script>
-        // --- MULTI-CANVAS GRAPHICS SETUP ---
-        const bgCanvas = document.getElementById('bgCanvas');
-        const bgCtx = bgCanvas.getContext('2d');
-        const ringCanvas = document.getElementById('ringCanvas');
-        const ringCtx = ringCanvas.getContext('2d');
+        const canvas = document.getElementById('vortexCanvas');
+        const ctx = canvas.getContext('2d');
+        const cursor = document.getElementById('customCursor');
 
-        let w = bgCanvas.width = window.innerWidth;
-        let h = bgCanvas.height = window.innerHeight;
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        let mouse = { x: width / 2, y: height / 2 };
         
-        let rw = ringCanvas.width = 500;
-        let rh = ringCanvas.height = 500;
-
-        let mouse = { x: w / 2, y: h / 2, tx: w / 2, ty: h / 2 };
-
         window.addEventListener('resize', () => {
-            w = bgCanvas.width = window.innerWidth;
-            h = bgCanvas.height = window.innerHeight;
-            if(window.innerWidth < 600) {
-                rw = ringCanvas.width = 280;
-                rh = ringCanvas.height = 280;
-            } else {
-                rw = ringCanvas.width = 500;
-                rh = ringCanvas.height = 500;
-            }
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles();
         });
 
         window.addEventListener('mousemove', (e) => {
-            mouse.tx = e.clientX;
-            mouse.ty = e.clientY;
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            // Track custom ring cursor
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
         });
 
-        // --- BACKGROUND: DUST GALAXY ---
-        const particles = [];
-        for (let i = 0; i < 200; i++) {
-            particles.push({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                size: Math.random() * 2,
-                speed: Math.random() * 0.5 + 0.1,
-                depth: Math.random() * 2
-            });
+        // Particle configuration 
+        let particles = [];
+        const particleCount = 450; 
+
+        function initParticles() {
+            particles = [];
+            const centerX = width / 2;
+            const centerY = height / 2;
+            
+            for(let i = 0; i < particleCount; i++) {
+                // Instantiating positions in a tight spiral galaxy ring structure
+                let angle = Math.random() * Math.PI * 2;
+                let radius = Math.random() * (Math.min(width, height) * 0.4) + 10;
+                particles.push({
+                    baseRadius: radius,
+                    angle: angle,
+                    speed: (Math.random() * 0.005 + 0.002) * (1 - radius / (Math.min(width, height) * 0.4)),
+                    size: Math.random() * 1.5 + 0.2,
+                    alpha: Math.random() * 0.5 + 0.1,
+                    // Track internal physics vectors for smooth displacement recovery
+                    vx: 0,
+                    vy: 0,
+                    cx: centerX,
+                    cy: centerY
+                });
+            }
         }
 
-        // --- MAIN ANIMATION LOOP ---
-        let time = 0;
-        function render() {
-            time += 0.02;
-            
-            // Handle mouse smoothing
-            mouse.x += (mouse.tx - mouse.x) * 0.08;
-            mouse.y += (mouse.ty - mouse.y) * 0.08;
+        function drawAndWarp() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; // Trail length overlay
+            ctx.fillRect(0, 0, width, height);
 
-            // 1. Draw Galaxy Background
-            bgCtx.fillStyle = '#050505';
-            bgCtx.fillRect(0, 0, w, h);
-            
-            bgCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            const centerX = width / 2;
+            const centerY = height / 2;
+
             particles.forEach(p => {
-                // Parallax shift based on mouse depth movement
-                let offsetX = (mouse.x - w/2) * 0.02 * p.depth;
-                let offsetY = (mouse.y - h/2) * 0.02 * p.depth;
-                
-                bgCtx.beginPath();
-                bgCtx.arc(p.x + offsetX, p.y + offsetY, p.size, 0, Math.PI * 2);
-                bgCtx.fill();
-                
-                // Slow ambient drift
-                p.y -= p.speed;
-                if (p.y < 0) p.y = h;
+                // Natural orbital physics motion
+                p.angle -= p.speed;
+                let targetX = centerX + Math.cos(p.angle) * p.baseRadius;
+                let targetY = centerY + Math.sin(p.angle) * p.baseRadius;
+
+                // Mouse gravity dynamic warp calculations
+                let dx = mouse.x - targetX;
+                let dy = mouse.y - targetY;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                let forceRadius = 150; // The reach area of the cursor warp distortion
+
+                if (distance < forceRadius) {
+                    // Pulls particles away or pushes them depending on vector angle, causing fluid liquid effect
+                    let force = (forceRadius - distance) / forceRadius;
+                    let angleForce = Math.atan2(dy, dx);
+                    targetX -= Math.cos(angleForce) * force * 60;
+                    targetY -= Math.sin(angleForce) * force * 60;
+                }
+
+                // Smooth particle position rendering
+                p.cx += (targetX - p.cx) * 0.08;
+                p.cy += (targetY - p.cy) * 0.08;
+
+                // Render dynamic star coordinates
+                ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+                ctx.beginPath();
+                ctx.arc(p.cx, p.cy, p.size, 0, Math.PI * 2);
+                ctx.fill();
             });
 
-            // 2. Draw Interactive Audio-Style Vector Centerpiece
-            ringCtx.clearRect(0, 0, rw, rh);
-            let cx = rw / 2;
-            let cy = rh / 2;
-            let baseRadius = rw * 0.35;
-            
-            // Calculate mouse distance from center to control visual warp intensity
-            let dx = mouse.tx - (window.innerWidth / 2);
-            let dy = mouse.ty - (window.innerHeight / 2);
-            let dist = Math.sqrt(dx*dx + dy*dy);
-            let warpIntensity = Math.min(dist * 0.1, 45); // Caps the warp safely
-
-            // Generate fluid waveform ring
-            ringCtx.beginPath();
-            for (let i = 0; i < 120; i++) {
-                let angle = (i / 120) * Math.PI * 2;
-                
-                // Complex wave mixing for abstract audio-visualizer simulation
-                let wave1 = Math.sin(angle * 6 + time) * 15;
-                let wave2 = Math.cos(angle * 12 - time * 2) * (warpIntensity * 0.5);
-                let interactiveWarp = Math.sin(angle * 3 + time) * warpIntensity;
-                
-                let r = baseRadius + wave1 + wave2 + interactiveWarp;
-                
-                let x = cx + Math.cos(angle) * r;
-                let y = cy + Math.sin(angle) * r;
-                
-                if (i === 0) ringCtx.moveTo(x, y);
-                else ringCtx.lineTo(x, y);
-            }
-            ringCtx.closePath();
-            ringCtx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-            ringCtx.lineWidth = 1.5;
-            ringCtx.stroke();
-
-            // Inner echo ring
-            ringCtx.beginPath();
-            for (let i = 0; i < 90; i++) {
-                let angle = (i / 90) * Math.PI * 2;
-                let wave = Math.cos(angle * 8 - time * 1.5) * (10 + warpIntensity * 0.2);
-                let r = (baseRadius * 0.8) + wave;
-                let x = cx + Math.cos(angle) * r;
-                let y = cy + Math.sin(angle) * r;
-                if (i === 0) ringCtx.moveTo(x, y);
-                else ringCtx.lineTo(x, y);
-            }
-            ringCtx.closePath();
-            ringCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-            ringCtx.lineWidth = 1;
-            ringCtx.stroke();
-
-            requestAnimationFrame(render);
+            requestAnimationFrame(drawAndWarp);
         }
 
-        render();
+        initParticles();
+        drawAndWarp();
     </script>
 </body>
 </html>
