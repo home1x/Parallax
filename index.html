@@ -3,298 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PARALLAX | Official Website</title>
+    <title>PARALLAX | VOID</title>
     <style>
-        /* --- RESET & BASE STYLES --- */
+        /* --- RESET & EXPERIMENTAL DARK AESTHETIC --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none;
+            cursor: crosshair; /* Aesthetic choice */
         }
 
         body, html {
             width: 100%;
             height: 100%;
-            overflow-x: hidden;
-            background-color: #000;
-            font-family: 'Courier New', Courier, monospace; /* Clean, minimalist aesthetic */
-            color: #fff;
+            background-color: #050505;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            letter-spacing: 0.15em;
         }
 
-        /* --- INTERACTIVE BACKGROUND --- */
-        #canvas-container {
+        /* --- BACKGROUND LAYER --- */
+        #bgCanvas {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: 1;
-            pointer-events: none; /* Allows clicks to pass through to links */
         }
 
-        /* --- LAYOUT CONTAINER --- */
-        .wrapper {
+        /* --- INTERACTIVE CENTERpiece --- */
+        .main-container {
             position: relative;
             z-index: 2;
-            min-height: 100vh;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 40px 20px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            padding: 60px 40px;
         }
 
-        /* --- NAVIGATION / HEADER --- */
+        /* --- TOP NAVIGATION --- */
         header {
             width: 100%;
-            max-width: 1200px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .brand {
-            font-size: 1.5rem;
-            letter-spacing: 0.5rem;
-            font-weight: 900;
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 800;
             text-transform: uppercase;
             text-decoration: none;
             color: #fff;
-            transition: opacity 0.3s;
+            mix-blend-mode: difference;
         }
 
-        .brand:hover {
-            opacity: 0.5;
-        }
-
-        .store-btn {
-            color: #fff;
-            text-decoration: none;
-            border: 1px solid #fff;
-            padding: 8px 20px;
-            font-size: 0.8rem;
-            letter-spacing: 0.2rem;
+        .store-link {
+            font-size: 0.75rem;
             text-transform: uppercase;
-            transition: all 0.4s ease;
-        }
-
-        .store-btn:hover {
-            background-color: #fff;
+            text-decoration: none;
             color: #000;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            background-color: #fff;
+            padding: 10px 24px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* --- MAIN HERO --- */
-        main {
-            text-align: center;
-            margin: auto 0;
+        .store-link:hover {
+            transform: scale(1.05);
         }
 
-        .hero-title {
-            font-size: 12vw;
-            font-weight: 900;
-            letter-spacing: 2rem;
-            text-transform: uppercase;
-            margin-right: -2rem; /* Offsets the last letter's spacing */
-            line-height: 1;
-            animation: fadeIn 2.5s ease-out;
-            opacity: 0.95;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-
-        .hero-subtitle {
-            font-size: 0.9rem;
-            letter-spacing: 0.6rem;
-            text-transform: uppercase;
-            margin-top: 20px;
-            opacity: 0.4;
-            animation: fadeIn 4s ease-out;
-        }
-
-        /* --- SOCIAL LINKS / FOOTER --- */
-        footer {
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .social-grid {
+        /* --- CENTER VISUAL --- */
+        .interactive-hero {
+            position: relative;
             display: flex;
             justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            list-style: none;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
         }
 
-        .social-grid a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.15rem;
-            text-transform: uppercase;
-            opacity: 0.5;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-        }
-
-        .social-grid a:hover {
-            opacity: 1;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-        }
-
-        /* Subtle underline animation */
-        .social-grid a::after {
-            content: '';
+        .visualizer-ring {
             position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background-color: #fff;
-            transition: width 0.3s ease;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
 
-        .social-grid a:hover::after {
+        .center-title {
+            position: absolute;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            margin-right: -0.4em;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        /* --- FOOTER SOCIAL LINKS --- */
+        footer {
             width: 100%;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: clamp(15px, 4vw, 40px);
+            list-style: none;
+            flex-wrap: wrap;
         }
 
-        /* Responsive scaling */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 14vw; letter-spacing: 1rem; margin-right: -1rem;}
-            .social-grid { gap: 15px 25px; }
+        .nav-links a {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* Mobile specific styling adjustments */
+        @media (max-width: 600px) {
+            .main-container { padding: 40px 20px; }
             header { flex-direction: column; gap: 20px; }
+            .interactive-hero { max-width: 280px; height: 280px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="canvas-container">
-        <canvas id="galaxyCanvas"></canvas>
-    </div>
+    <!-- Galaxy / Nebula Background Canvas -->
+    <canvas id="bgCanvas"></canvas>
 
-    <div class="wrapper">
-        
+    <div class="main-container">
         <header>
-            <a href="#" class="brand">PARALLAX</a>
-            <a href="https://boundless-official-store.printify.me/" target="_blank" class="store-btn">Shop Store</a>
+            <a href="#" class="logo">P A R A L L A X</a>
+            <a href="https://boundless-official-store.printify.me/" target="_blank" class="store-link">Shop Hub</a>
         </header>
 
-        <main>
-            <h1 class="hero-title">PARALLAX</h1>
-            <p class="hero-subtitle">Enter the Void</p>
-        </main>
+        <!-- Center Interactive Core -->
+        <div class="interactive-hero">
+            <canvas id="ringCanvas" class="visualizer-ring"></canvas>
+            <div class="center-title">PARALLAX</div>
+        </div>
 
         <footer>
-            <ul class="social-grid">
-                <li><a href="https://www.instagram.com/parallax.x.x?igsh=eTlnM20xZW5lcDUx&utm_source=qr" target="_blank">Instagram</a></li>
-                <li><a href="https://m.youtube.com/@parallax.x.x?ra=m" target="_blank">YouTube</a></li>
-                <li><a href="https://x.com/Parallax_x_x" target="_blank">X (Twitter)</a></li>
-                <li><a href="https://www.facebook.com/Parallax.x.x.x.x/" target="_blank">Facebook</a></li>
-                <li><a href="https://www.tiktok.com/@parallax.x.x?_r=1&_t=ZT-94UGGvXVNug" target="_blank">TikTok</a></li>
-                <li><a href="https://discord.com/invite/rhXuzGvM6" target="_blank">Discord</a></li>
+            <ul class="nav-links">
+                <li><a href="https://www.instagram.com/parallax.x.x?igsh=eTlnM20xZW5lcDUx&utm_source=qr" target="_blank">// Instagram</a></li>
+                <li><a href="https://m.youtube.com/@parallax.x.x?ra=m" target="_blank">// YouTube</a></li>
+                <li><a href="https://x.com/Parallax_x_x" target="_blank">// X</a></li>
+                <li><a href="https://www.facebook.com/Parallax.x.x.x.x/" target="_blank">// Facebook</a></li>
+                <li><a href="https://www.tiktok.com/@parallax.x.x?_r=1&_t=ZT-94UGGvXVNug" target="_blank">// TikTok</a></li>
+                <li><a href="https://discord.com/invite/rhXuzGvM6" target="_blank">// Discord</a></li>
             </ul>
         </footer>
-
     </div>
 
     <script>
-        const canvas = document.getElementById('galaxyCanvas');
-        const ctx = canvas.getContext('2d');
+        // --- MULTI-CANVAS GRAPHICS SETUP ---
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        const ringCanvas = document.getElementById('ringCanvas');
+        const ringCtx = ringCanvas.getContext('2d');
 
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        let w = bgCanvas.width = window.innerWidth;
+        let h = bgCanvas.height = window.innerHeight;
+        
+        let rw = ringCanvas.width = 500;
+        let rh = ringCanvas.height = 500;
 
-        const numStars = 150;
-        const stars = [];
-
-        // Mouse coordinates for tracking interactivity
-        let mouse = { x: width / 2, y: height / 2, targetX: width / 2, targetY: height / 2 };
+        let mouse = { x: w / 2, y: h / 2, tx: w / 2, ty: h / 2 };
 
         window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            w = bgCanvas.width = window.innerWidth;
+            h = bgCanvas.height = window.innerHeight;
+            if(window.innerWidth < 600) {
+                rw = ringCanvas.width = 280;
+                rh = ringCanvas.height = 280;
+            } else {
+                rw = ringCanvas.width = 500;
+                rh = ringCanvas.height = 500;
+            }
         });
 
         window.addEventListener('mousemove', (e) => {
-            mouse.targetX = e.clientX;
-            mouse.targetY = e.clientY;
+            mouse.tx = e.clientX;
+            mouse.ty = e.clientY;
         });
 
-        // Generate properties for star nodes to construct a galaxy/nebula cluster effect
-        class Star {
-            constructor() {
-                this.reset();
-                // Randomize starting positions across the screen initially
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-            }
+        // --- BACKGROUND: DUST GALAXY ---
+        const particles = [];
+        for (let i = 0; i < 200; i++) {
+            particles.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.5 + 0.1,
+                depth: Math.random() * 2
+            });
+        }
 
-            reset() {
-                this.orbitRadius = Math.random() * (Math.min(width, height) * 0.6);
-                this.angle = Math.random() * Math.PI * 2;
-                this.orbitSpeed = (Math.random() * 0.0005) + 0.0001;
-                this.size = Math.random() * 1.5 + 0.5;
-                // Grayscale/Monochrome alpha values
-                this.alpha = Math.random() * 0.6 + 0.2;
-            }
+        // --- MAIN ANIMATION LOOP ---
+        let time = 0;
+        function render() {
+            time += 0.02;
+            
+            // Handle mouse smoothing
+            mouse.x += (mouse.tx - mouse.x) * 0.08;
+            mouse.y += (mouse.ty - mouse.y) * 0.08;
 
-            update() {
-                // Orbiting mechanism
-                this.angle += this.orbitSpeed;
+            // 1. Draw Galaxy Background
+            bgCtx.fillStyle = '#050505';
+            bgCtx.fillRect(0, 0, w, h);
+            
+            bgCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            particles.forEach(p => {
+                // Parallax shift based on mouse depth movement
+                let offsetX = (mouse.x - w/2) * 0.02 * p.depth;
+                let offsetY = (mouse.y - h/2) * 0.02 * p.depth;
                 
-                // Base positions derived from cosmic center rotation
-                let baseX = width / 2 + Math.cos(this.angle) * this.orbitRadius;
-                let baseY = height / 2 + Math.sin(this.angle) * this.orbitRadius;
-
-                // Parallax interactive effect: stars shift slightly based on mouse position
-                // Stars closer to center move differently than stars far away
-                let shiftX = (mouse.x - width / 2) * (this.orbitRadius / width) * 0.4;
-                let shiftY = (mouse.y - height / 2) * (this.orbitRadius / height) * 0.4;
-
-                this.x = baseX + shiftX;
-                this.y = baseY + shiftY;
-            }
-
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        // Initialize star system
-        for (let i = 0; i < numStars; i++) {
-            stars.push(new Star());
-        }
-
-        // Animation loop
-        function animate() {
-            // Smooth mouse easing
-            mouse.x += (mouse.targetX - mouse.x) * 0.05;
-            mouse.y += (mouse.targetY - mouse.y) * 0.05;
-
-            // Creates a trailing/nebula illusion by not fully clearing previous frame
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-            ctx.fillRect(0, 0, width, height);
-
-            stars.forEach(star => {
-                star.update();
-                star.draw();
+                bgCtx.beginPath();
+                bgCtx.arc(p.x + offsetX, p.y + offsetY, p.size, 0, Math.PI * 2);
+                bgCtx.fill();
+                
+                // Slow ambient drift
+                p.y -= p.speed;
+                if (p.y < 0) p.y = h;
             });
 
-            requestAnimationFrame(animate);
+            // 2. Draw Interactive Audio-Style Vector Centerpiece
+            ringCtx.clearRect(0, 0, rw, rh);
+            let cx = rw / 2;
+            let cy = rh / 2;
+            let baseRadius = rw * 0.35;
+            
+            // Calculate mouse distance from center to control visual warp intensity
+            let dx = mouse.tx - (window.innerWidth / 2);
+            let dy = mouse.ty - (window.innerHeight / 2);
+            let dist = Math.sqrt(dx*dx + dy*dy);
+            let warpIntensity = Math.min(dist * 0.1, 45); // Caps the warp safely
+
+            // Generate fluid waveform ring
+            ringCtx.beginPath();
+            for (let i = 0; i < 120; i++) {
+                let angle = (i / 120) * Math.PI * 2;
+                
+                // Complex wave mixing for abstract audio-visualizer simulation
+                let wave1 = Math.sin(angle * 6 + time) * 15;
+                let wave2 = Math.cos(angle * 12 - time * 2) * (warpIntensity * 0.5);
+                let interactiveWarp = Math.sin(angle * 3 + time) * warpIntensity;
+                
+                let r = baseRadius + wave1 + wave2 + interactiveWarp;
+                
+                let x = cx + Math.cos(angle) * r;
+                let y = cy + Math.sin(angle) * r;
+                
+                if (i === 0) ringCtx.moveTo(x, y);
+                else ringCtx.lineTo(x, y);
+            }
+            ringCtx.closePath();
+            ringCtx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+            ringCtx.lineWidth = 1.5;
+            ringCtx.stroke();
+
+            // Inner echo ring
+            ringCtx.beginPath();
+            for (let i = 0; i < 90; i++) {
+                let angle = (i / 90) * Math.PI * 2;
+                let wave = Math.cos(angle * 8 - time * 1.5) * (10 + warpIntensity * 0.2);
+                let r = (baseRadius * 0.8) + wave;
+                let x = cx + Math.cos(angle) * r;
+                let y = cy + Math.sin(angle) * r;
+                if (i === 0) ringCtx.moveTo(x, y);
+                else ringCtx.lineTo(x, y);
+            }
+            ringCtx.closePath();
+            ringCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            ringCtx.lineWidth = 1;
+            ringCtx.stroke();
+
+            requestAnimationFrame(render);
         }
 
-        animate();
+        render();
     </script>
 </body>
 </html>
