@@ -57,7 +57,7 @@
             transition: all 0.3s ease;
         }
 
-        /* --- THE NEW INJECTED CUSTOM ARTIST LOGO STYLE --- */
+        /* --- CUSTOM HAND-DRAWN SIGNATURE LOGO STYLE --- */
         .custom-logo-container {
             display: inline-flex;
             align-items: center;
@@ -65,8 +65,8 @@
         }
 
         .custom-logo-svg {
-            /* Gives the custom cursive layout a bright, pristine studio stage glow */
-            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7)) 
+            /* Clean studio lighting aura for the signature text */
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)) 
                     drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
         }
 
@@ -88,7 +88,7 @@
         }
 
         .logo-wrapper {
-            height: 45px;
+            height: 42px;
         }
 
         nav a {
@@ -118,8 +118,8 @@
         }
 
         .hero-title-wrapper {
-            width: clamp(280px, 65vw, 680px);
-            transform: rotate(-2.5deg); /* Subtle premium rock star tilt */
+            width: clamp(280px, 70vw, 720px);
+            transform: rotate(-2.5deg); /* Signature angle tilt */
         }
 
         /* --- LAYOUT CONTAINER --- */
@@ -305,7 +305,7 @@
             .store-banner { padding: 40px 30px; }
             .network-block { padding: 40px 20px; }
             header { padding: 1.2rem 4%; }
-            .logo-wrapper { height: 35px; }
+            .logo-wrapper { height: 32px; }
         }
     </style>
 </head>
@@ -315,9 +315,9 @@
 
     <header>
         <div class="logo-wrapper custom-logo-container">
-            <svg class="custom-logo-svg" viewBox="0 0 320 90" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <path d="M45,75 L45,15 C45,15 75,10 75,32 C75,54 45,52 45,52 L60,75 M92,58 C80,58 78,44 90,44 C102,44 102,58 92,58 M102,58 L102,44 M115,58 L115,44 C115,40 125,40 125,46 M138,58 C128,58 126,44 136,44 C146,44 146,58 138,58 M146,58 L146,44 M158,28 L158,58 M168,58 C158,58 156,44 166,44 C176,44 176,58 168,58 M176,58 L176,44 M185,58 L197,44 M200,58 L188,44 M212,58 C202,58 200,44 210,44 C220,44 220,58 212,58 M220,58 L220,44" 
-                      fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="custom-logo-svg" viewBox="0 0 340 90" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 35 75 L 35 15 C 35 15 70 8 70 32 C 70 56 35 52 35 52 L 55 75 M 100 58 C 84 58 84 42 100 42 C 116 42 116 58 100 58 M 112 58 L 112 42 M 128 58 L 128 42 C 128 36 142 36 142 45 L 142 58 M 162 58 C 146 58 146 42 162 42 C 178 42 178 58 162 58 M 174 58 L 174 42 M 188 20 L 188 58 M 208 58 C 192 58 192 42 208 42 C 224 42 224 58 208 58 M 220 58 L 220 42 M 232 58 L 246 42 M 250 58 L 236 42 M 268 58 C 252 58 252 42 268 42 C 284 42 284 58 268 58 M 278 58 L 292 42" 
+                      fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
         <nav>
@@ -329,8 +329,8 @@
 
     <section class="hero">
         <div class="hero-title-wrapper custom-logo-container">
-            <svg class="custom-logo-svg" viewBox="0 0 320 90" width="100%" xmlns="http://www.w3.org/2000/svg">
-                <path d="M45,75 L45,15 C45,15 75,10 75,32 C75,54 45,52 45,52 L60,75 M92,58 C80,58 78,44 90,44 C102,44 102,58 92,58 M102,58 L102,44 M115,58 L115,44 C115,40 125,40 125,46 M138,58 C128,58 126,44 136,44 C146,44 146,58 138,58 M146,58 L146,44 M158,28 L158,58 M168,58 C158,58 156,44 166,44 C176,44 176,58 168,58 M176,58 L176,44 M185,58 L197,44 M200,58 L188,44 M212,58 C202,58 200,44 210,44 C220,44 220,58 212,58 M220,58 L220,44" 
+            <svg class="custom-logo-svg" viewBox="0 0 340 90" width="100%" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 35 75 L 35 15 C 35 15 70 8 70 32 C 70 56 35 52 35 52 L 55 75 M 100 58 C 84 58 84 42 100 42 C 116 42 116 58 100 58 M 112 58 L 112 42 M 128 58 L 128 42 C 128 36 142 36 142 45 L 142 58 M 162 58 C 146 58 146 42 162 42 C 178 42 178 58 162 58 M 174 58 L 174 42 M 188 20 L 188 58 M 208 58 C 192 58 192 42 208 42 C 224 42 224 58 208 58 M 220 58 L 220 42 M 232 58 L 246 42 M 250 58 L 236 42 M 268 58 C 252 58 252 42 268 42 C 284 42 284 58 268 58 M 278 58 L 292 42" 
                       fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
@@ -389,10 +389,10 @@
 
     <footer>
         &copy; 
-        <span class="custom-logo-container" style="height: 20px; vertical-align: middle;">
-            <svg class="custom-logo-svg" viewBox="0 0 320 90" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <path d="M45,75 L45,15 C45,15 75,10 75,32 C75,54 45,52 45,52 L60,75 M92,58 C80,58 78,44 90,44 C102,44 102,58 92,58 M102,58 L102,44 M115,58 L115,44 C115,40 125,40 125,46 M138,58 C128,58 126,44 136,44 C146,44 146,58 138,58 M146,58 L146,44 M158,28 L158,58 M168,58 C158,58 156,44 166,44 C176,44 176,58 168,58 M176,58 L176,44 M185,58 L197,44 M200,58 L188,44 M212,58 C202,58 200,44 210,44 C220,44 220,58 212,58 M220,58 L220,44" 
-                      fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <span class="custom-logo-container" style="height: 18px; vertical-align: middle;">
+            <svg class="custom-logo-svg" viewBox="0 0 340 90" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 35 75 L 35 15 C 35 15 70 8 70 32 C 70 56 35 52 35 52 L 55 75 M 100 58 C 84 58 84 42 100 42 C 116 42 116 58 100 58 M 112 58 L 112 42 M 128 58 L 128 42 C 128 36 142 36 142 45 L 142 58 M 162 58 C 146 58 146 42 162 42 C 178 42 178 58 162 58 M 174 58 L 174 42 M 188 20 L 188 58 M 208 58 C 192 58 192 42 208 42 C 224 42 224 58 208 58 M 220 58 L 220 42 M 232 58 L 246 42 M 250 58 L 236 42 M 268 58 C 252 58 252 42 268 42 C 284 42 284 58 268 58 M 278 58 L 292 42" 
+                      fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </span>. all rights reserved.
     </footer>
