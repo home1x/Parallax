@@ -10,7 +10,6 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Loaded Rock Salt for a genuine, gritty hand-painted rock star edge -->
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 
     <style>
@@ -64,18 +63,22 @@
 
         /* --- THE INJECTED CUSTOM ARTIST LOGO STYLE --- */
         .cursive-artist {
-            /* Rock Salt provides the perfect textured, rough brush signature look */
             font-family: 'Rock Salt', cursive, sans-serif;
             font-weight: 400;
-            text-transform: none;
+            /* STRICTLY FIXED: Forces lowercase layout across all browsers */
+            text-transform: lowercase !important; 
             letter-spacing: -0.02em; 
             line-height: 1.2;
             color: #ffffff;
-            /* Heavy atmospheric glow to catch the eye against the dark background */
             text-shadow: 
                 0 0 8px rgba(255, 255, 255, 0.7),
                 0 0 25px rgba(255, 255, 255, 0.4),
                 0 0 50px rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Capitalizes just the very first letter of the element */
+        .cursive-artist::first-letter {
+            text-transform: uppercase !important;
         }
 
         /* --- CRYSTAL CLEAR FIXED HEADER --- */
@@ -127,7 +130,7 @@
 
         .hero-title {
             font-size: clamp(3.2rem, 11vw, 8rem); 
-            transform: rotate(-3.5deg); /* Distorted, raw tilt posture */
+            transform: rotate(-3.5deg); 
         }
 
         /* --- LAYOUT CONTAINER --- */
