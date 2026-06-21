@@ -8,6 +8,7 @@
 
     <title>Parallax</title>
 
+    <!-- GOOGLE KNOWLEDGE PANEL SCHEMA MARKUP -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -230,7 +231,7 @@
             text-transform: capitalize;
         }
 
-        /* --- NEW UPGRADED TOUR DESIGN --- */
+        /* --- TOUR DESIGN --- */
         .tour-table {
             display: flex;
             flex-direction: column;
@@ -271,7 +272,6 @@
             transform: scale(1.005);
         }
 
-        /* Column Elements Stylings */
         .td-date {
             font-family: var(--font-mono);
             font-size: 1rem;
@@ -307,7 +307,6 @@
             text-align: right;
         }
 
-        /* Status Badges & Buttons */
         .tour-status {
             display: inline-block;
             font-family: var(--font-mono);
@@ -512,6 +511,7 @@
 
     <main class="container">
 
+        <!-- ALBUMS SECTION -->
         <section id="albums">
             <div class="section-header">
                 <h2>Albums</h2>
@@ -544,12 +544,14 @@
             </div>
         </section>
 
+        <!-- TOUR SECTION -->
         <section id="tour">
             <div class="section-header">
                 <h2>Tour</h2>
             </div>
             
             <div class="tour-table">
+                <!-- Headers -->
                 <div class="tour-header-row">
                     <div>Date</div>
                     <div>Venue</div>
@@ -558,43 +560,34 @@
                     <div style="text-align: right;">Status</div>
                 </div>
 
+                <!-- SHOW 1 -->
                 <div class="tour-data-row">
-                    <div class="td-date">OCT 14, 2026</div>
-                    
-                    <div class="td-venue">The Echo Chamber</div>
-                    
-                    <div class="td-location">Los Angeles, CA</div>
-                    
-                    <div class="td-lineup">w/ Special Guests<br>+ Audio Oasis</div>
-                    
+                    <div class="td-date">DATE HERE</div>
+                    <div class="td-venue">VENUE NAME</div>
+                    <div class="td-location">CITY, STATE</div>
+                    <div class="td-lineup">LINEUP / SUPPORT DETAILS</div>
                     <div class="td-action">
-                        <a href="YOUR_TICKET_LINK_HERE" target="_blank" class="tour-status status-onsale">Tickets</a>
+                        <a href="#" target="_blank" class="tour-status status-onsale">Tickets</a>
                     </div>
                 </div>
 
+                <!-- SHOW 2 -->
                 <div class="tour-data-row">
-                    <div class="td-date">OCT 19, 2026</div>
-                    
-                    <div class="td-venue">Terminal Ambient</div>
-                    
-                    <div class="td-location">New York, NY</div>
-                    
-                    <div class="td-lineup">Solo Performance</div>
-                    
+                    <div class="td-date">DATE HERE</div>
+                    <div class="td-venue">VENUE NAME</div>
+                    <div class="td-location">CITY, STATE</div>
+                    <div class="td-lineup">LINEUP / SUPPORT DETAILS</div>
                     <div class="td-action">
-                        <a href="YOUR_TICKET_LINK_HERE" target="_blank" class="tour-status status-lowtickets">Low Tickets</a>
+                        <a href="#" target="_blank" class="tour-status status-lowtickets">Low Tickets</a>
                     </div>
                 </div>
 
+                <!-- SHOW 3 -->
                 <div class="tour-data-row">
-                    <div class="td-date">NOV 02, 2026</div>
-                    
-                    <div class="td-venue">The Sub-Level Lounge</div>
-                    
-                    <div class="td-location">London, UK</div>
-                    
-                    <div class="td-lineup">w/ Curated Support</div>
-                    
+                    <div class="td-date">DATE HERE</div>
+                    <div class="td-venue">VENUE NAME</div>
+                    <div class="td-location">CITY, COUNTRY</div>
+                    <div class="td-lineup">LINEUP / SUPPORT DETAILS</div>
                     <div class="td-action">
                         <span class="tour-status status-soldout">Sold Out</span>
                     </div>
@@ -602,6 +595,7 @@
             </div>
         </section>
 
+        <!-- CONNECT SECTION -->
         <section id="connect">
             <div class="section-header">
                 <h2>Connect</h2>
@@ -640,6 +634,7 @@
             </div>
         </section>
 
+        <!-- STORE SECTION -->
         <section id="store" class="store-banner">
             <h3>Store</h3>
             <p>
