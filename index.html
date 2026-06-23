@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="google990317cbb4fca942" />
-    <title>PARALLAX // AUDIO ARCHIVE</title>
-
+    <title>Parallax Website</title>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -25,529 +24,135 @@
       ]
     }
     </script>
-
     <style>
-        /* --- CORE CONFIGURATION --- */
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        :root {
-            --bg: #030303;
-            --panel: rgba(10, 10, 10, 0.75);
-            --border: rgba(255, 255, 255, 0.05);
-            --neon: #ffffff; /* Change this to a color like #a855f7 for purple glow if preferred */
-            --text-primary: #ffffff;
-            --text-secondary: #666666;
-            --font-mono: 'Courier New', Courier, monospace;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            background: var(--bg);
-        }
-
-        body {
-            color: var(--text-primary);
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
             overflow-x: hidden;
         }
-
-        /* Custom Scroll */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
-
-        /* --- VISUALIZER BACKGROUND --- */
-        #visualizer-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.25;
+        .signature-container {
+            margin-top: 50px;
         }
-
-        /* --- ASYMMETRICAL FIXED HEADER --- */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 4%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            border-bottom: 1px solid var(--border);
-            background: linear-gradient(to bottom, #030303, transparent);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+        .signature {
+            width: 300px;
+            max-width: 80%;
+            height: auto;
         }
-
-        .logo-wrapper { height: 24px; }
-        .signature-path {
-            fill: none;
-            stroke: var(--text-primary);
-            stroke-width: 2px;
-            stroke-linecap: round;
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 40px;
+            justify-items: center;
         }
-
-        nav a {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            margin-left: 24px;
-            letter-spacing: 2px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-
-        nav a:hover, nav a.active { color: var(--neon); }
-
-        /* --- INDUSTRIAL HERO --- */
-        .hero {
-            height: 95vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 4%;
+        .grid-item {
             text-align: center;
         }
-
-        .hero h1 {
-            font-family: var(--font-mono);
-            font-size: calc(1rem + 1vw);
-            color: var(--text-secondary);
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
+        .grid-item img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid white;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
         }
-
-        .hero-title-wrapper {
-            width: clamp(260px, 45vw, 450px);
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.15));
+        .grid-item p {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
         }
-
-        /* --- CONTENT CONTAINER --- */
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 4% 100px 4%;
-        }
-
-        section {
-            margin-bottom: 160px;
-            scroll-margin-top: 140px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: baseline;
-            gap: 15px;
+        .button-container {
+            margin-top: 40px;
             margin-bottom: 50px;
         }
-
-        .section-header .index {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            background-color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3);
+            transition: 0.3s;
         }
-
-        .section-header h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -2px;
+        .btn:hover {
+            background-color: #ddd;
+            transform: scale(1.05);
         }
-
-        /* --- ALBUMS INDEX --- */
-        .albums-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem 2rem;
+        .social-icons {
+            margin-top: 30px;
+            padding-bottom: 50px;
         }
-
-        .album-card {
-            position: relative;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            padding: 16px;
-            transition: border-color 0.3s, transform 0.3s;
+        .social-icons a {
+            color: white;
+            font-size: 30px;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: 0.3s;
         }
-
-        .album-card:hover {
-            border-color: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
+        .social-icons a:hover {
+            color: #ddd;
         }
-
-        .album-art {
+        /* Star background effect */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            filter: grayscale(40%);
-            transition: filter 0.3s;
-            margin-bottom: 16px;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
-
-        .album-card:hover .album-art { filter: grayscale(0%); }
-
-        .album-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-        }
-
-        .album-info h4 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
-        .album-info span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
-
-        /* --- STREAMLINED TOUR PORTAL --- */
-        .tour-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .tour-row {
-            display: grid;
-            grid-template-columns: 0.5fr 1.5fr 1.5fr 1fr;
-            padding: 30px;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .tour-row:hover { border-color: rgba(255,255,255,0.15); }
-
-        .t-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); }
-        .t-venue { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.5px; }
-        .t-location { font-size: 0.95rem; color: var(--text-secondary); }
-        .t-btn {
-            justify-self: end;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            border: 1px solid var(--text-primary);
-            padding: 10px 24px;
-            letter-spacing: 1px;
-        }
-        .t-btn:hover { background: var(--text-primary); color: var(--bg); }
-        .t-sold { border-color: transparent; background: rgba(255,255,255,0.02); color: var(--text-secondary); pointer-events: none; }
-
-        /* --- MATRIX CONNECT GRID --- */
-        .connect-matrix {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-        }
-
-        .matrix-cell {
-            background: var(--bg);
-            padding: 40px 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 160px;
-            transition: background 0.3s;
-        }
-
-        .matrix-cell:hover { background: rgba(255,255,255,0.02); }
-        .matrix-cell h3 { font-size: 1.5rem; font-weight: 300; letter-spacing: -0.5px; }
-        .matrix-cell span { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-secondary); text-transform: uppercase; }
-
-        /* --- THE VAULT MERCH STORE --- */
-        .store-vault {
-            border: 1px solid var(--border);
-            background: radial-gradient(circle at top left, rgba(20,20,20,0.8), var(--bg));
-            padding: 80px 5%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .store-content { max-width: 600px; position: relative; z-index: 2; }
-        .store-vault h3 { font-size: 3rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; letter-spacing: -1px; }
-        .store-vault p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 30px; }
-
-        /* --- MAILING INFRASTRUCTURE --- */
-        .vault-form-box {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            padding: 60px 40px;
-        }
-        .vault-form-box h3 { font-family: var(--font-mono); font-size: 1.1rem; text-transform: uppercase; margin-bottom: 25px; color: var(--text-secondary); }
-        
-        .input-group {
-            display: flex;
-            border-bottom: 2px solid var(--text-secondary);
-            padding: 10px 0;
-        }
-        .input-group:focus-within { border-color: var(--text-primary); }
-        .input-group input {
-            background: none; border: none; outline: none;
-            color: var(--text-primary); font-family: var(--font-mono); font-size: 1rem;
-            width: 100%;
-        }
-        .input-group button {
-            background: none; border: none; color: var(--text-primary);
-            font-family: var(--font-mono); cursor: pointer; font-size: 0.85rem;
-        }
-
-        /* --- SYSTEM FOOTER --- */
-        footer {
-            padding: 60px 4% 120px 4%;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-        }
-
-        .footer-sig { height: 18px; opacity: 0.4; }
-
-        /* --- RESPONSIVE ADAPTABILITY --- */
-        @media (max-width: 900px) {
-            .tour-row { grid-template-columns: 1fr; gap: 15px; padding: 25px; }
-            .t-btn { justify-self: start; width: 100%; text-align: center; }
-        }
-
-        @media (max-width: 768px) {
-            header { display: none; }
-            section { margin-bottom: 100px; }
-            .store-vault { padding: 50px 20px; }
-            footer { flex-direction: column; gap: 20px; text-align: center; }
-            
-            /* Compact Mobile Nav Bottom Stick */
-            .mobile-tray {
-                position: fixed; bottom: 0; left: 0; width: 100%; height: 60px;
-                background: #030303; border-top: 1px solid var(--border);
-                display: flex; justify-content: space-around; align-items: center; z-index: 1000;
-            }
-            .mobile-tray a { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-secondary); text-transform: uppercase; }
-        }
-
-        @media (min-width: 769px) { .mobile-tray { display: none; } }
     </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <!-- INTERACTIVE AUDIO WAVE CANVAS -->
-    <canvas id="visualizer-canvas"></canvas>
+    <div class="stars"></div>
 
-    <!-- DESKTOP DYNAMIC OVERLAY NAVIGATION -->
-    <header>
-        <div class="logo-wrapper custom-signature-container">
-            <svg viewBox="0 0 240 70" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <path class="signature-path" d="M 30 54 L 30 16 M 30 18 C 48 10, 68 18, 52 34 C 40 44, 30 40, 30 40" />
-                <path class="signature-path" d="M 66 38 C 74 34, 76 46, 84 46 C 92 46, 96 34, 100 34 C 104 34, 106 46, 114 46 C 122 46, 128 22, 134 22 L 128 46 C 132 46, 136 22, 142 22 L 136 46 C 144 46, 146 34, 154 34 C 158 34, 160 46, 168 46 C 174 46, 184 34, 190 40" />
-            </svg>
-        </div>
-        <nav>
-            <a href="#albums">Discography</a>
-            <a href="#tour">Live Grid</a>
-            <a href="#connect">Portals</a>
-            <a href="#store">Supply</a>
-            <a href="#newsletter">Ledger</a>
-        </nav>
-    </header>
-
-    <!-- MOBILE SYSTEM TRAY -->
-    <div class="mobile-tray">
-        <a href="#albums">Audio</a>
-        <a href="#tour">Live</a>
-        <a href="#connect">Links</a>
-        <a href="#store">Shop</a>
+    <div class="signature-container">
+        <svg class="signature" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 30 54 L 30 16" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M 30 18 C 48 10, 68 18, 52 34 C 40 44, 30 40, 30 40" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M 66 38 C 74 34, 76 46, 84 46 C 92 46, 96 34, 100 34 C 104 34, 106 46, 114 46 C 122 46, 128 22, 134 22 L 128 46 C 132 46, 136 22, 142 22 L 136 46 C 144 46, 146 34, 154 34 C 158 34, 160 46, 168 46 C 174 46, 184 34, 190 40" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M 45 56 L 210 50" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
     </div>
 
-    <!-- MAIN HERO ARCHIVE SCENE -->
-    <section class="hero">
-        <h1>PARALLAX AUDIO SYSTEM</h1>
-        <div class="hero-title-wrapper custom-signature-container">
-            <svg viewBox="0 0 240 70" width="100%" xmlns="http://www.w3.org/2000/svg">
-                <path class="signature-path" d="M 30 54 L 30 16 M 30 18 C 48 10, 68 18, 52 34 C 40 44, 30 40, 30 40" stroke-width="2.5px" />
-                <path class="signature-path" d="M 66 38 C 74 34, 76 46, 84 46 C 92 46, 96 34, 100 34 C 104 34, 106 46, 114 46 C 122 46, 128 22, 134 22 L 128 46 C 132 46, 136 22, 142 22 L 136 46 C 144 46, 146 34, 154 34 C 158 34, 160 46, 168 46 C 174 46, 184 34, 190 40" stroke-width="2.5px" />
-                <path class="signature-path" d="M 45 56 L 210 50" stroke-width="1px" opacity="0.4" />
-            </svg>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="Album 8.png" alt="Album 8">
+            <p>Album 8</p>
         </div>
-    </section>
-
-    <main class="container">
-
-        <!-- INDEX 01: DISCOGRAPHY -->
-        <section id="albums">
-            <div class="section-header">
-                <div class="index">01 //</div>
-                <h2>DISCOGRAPHY</h2>
-            </div>
-            <div class="albums-grid">
-                <div class="album-card">
-                    <img src="Album 8.png" alt="Cover" class="album-art">
-                    <div class="album-info">
-                        <h4>Project I</h4>
-                        <span>COMING SOON</span>
-                    </div>
-                </div>
-                <div class="album-card">
-                    <img src="Album 11.jpeg" alt="Cover" class="album-art">
-                    <div class="album-info">
-                        <h4>Project II</h4>
-                        <span>COMING SOON</span>
-                    </div>
-                </div>
-                <div class="album-card">
-                    <img src="Album 10.jpeg" alt="Cover" class="album-art">
-                    <div class="album-info">
-                        <h4>Project III</h4>
-                        <span>COMING SOON</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- INDEX 02: LIVE COORDINATES -->
-        <section id="tour">
-            <div class="section-header">
-                <div class="index">02 //</div>
-                <h2>LIVE COORDINATES</h2>
-            </div>
-            <div class="tour-list">
-                <div class="tour-row">
-                    <div class="t-date">TBA // 2026</div>
-                    <div class="t-venue">VENUE ARCHIVE A</div>
-                    <div class="t-location">CITY, STATE</div>
-                    <a href="#" target="_blank" class="t-btn">ACQUIRE ↗</a>
-                </div>
-                <div class="tour-row">
-                    <div class="t-date">TBA // 2026</div>
-                    <div class="t-venue">VENUE ARCHIVE B</div>
-                    <div class="t-location">CITY, STATE</div>
-                    <a href="#" target="_blank" class="t-btn">ACQUIRE ↗</a>
-                </div>
-                <div class="tour-row">
-                    <div class="t-date">TBA // 2026</div>
-                    <div class="t-venue">VENUE ARCHIVE C</div>
-                    <div class="t-location">CITY, COUNTRY</div>
-                    <a href="#" class="t-btn t-sold">DEPLETED</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- INDEX 03: PORTAL NETWORK -->
-        <section id="connect">
-            <div class="section-header">
-                <div class="index">03 //</div>
-                <h2>NETWORK PORTALS</h2>
-            </div>
-            <div class="connect-matrix">
-                <a href="https://www.instagram.com/parallax.x.x" target="_blank" class="matrix-cell">
-                    <span>[ PORTAL 01 ]</span>
-                    <h3>INSTAGRAM</h3>
-                </a>
-                <a href="https://m.youtube.com/@parallax.x.x" target="_blank" class="matrix-cell">
-                    <span>[ PORTAL 02 ]</span>
-                    <h3>YOUTUBE</h3>
-                </a>
-                <a href="https://x.com/Parallax_x_x" target="_blank" class="matrix-cell">
-                    <span>[ PORTAL 03 ]</span>
-                    <h3>X.COM</h3>
-                </a>
-                <a href="https://www.tiktok.com/@parallax.x.x" target="_blank" class="matrix-cell">
-                    <span>[ PORTAL 04 ]</span>
-                    <h3>TIKTOK</h3>
-                </a>
-                <a href="https://www.facebook.com/Parallax.x.x.x.x/" target="_blank" class="matrix-cell">
-                    <span>[ PORTAL 05 ]</span>
-                    <h3>FACEBOOK</h3>
-                </a>
-                <a href="https://discord.com/invite/rhXuzGvM6" target="_blank" class="matrix-cell">
-                    <span>[ PORTAL 06 ]</span>
-                    <h3>THE NETWORK</h3>
-                </a>
-            </div>
-        </section>
-
-        <!-- INDEX 04: APPAREL SUPPLY -->
-        <section id="store" class="store-vault">
-            <div class="store-content">
-                <h3>CURATED SUPPLY</h3>
-                <p>Limited batch design assets, physical garments, and concept merchandise catalog issues.</p>
-                <a href="https://home1x.github.io/Store/" target="_blank" class="t-btn" style="background:#fff; color:#000;">OPEN STOREFRONT →</a>
-            </div>
-        </section>
-
-        <!-- INDEX 05: CENTRAL LEDGER -->
-        <section id="newsletter" class="vault-form-box">
-            <h3>05 // DISPATCH LEDGER</h3>
-            <div style="max-width: 500px;">
-                <form action="#" method="POST" class="input-group" onsubmit="event.preventDefault();">
-                    <input type="email" placeholder="INPUT EMAIL COORDINATE" required autocomplete="off">
-                    <button type="submit">REGISTER ↗</button>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- GLOBAL INDUSTRIAL FOOTER -->
-    <footer>
-        <div>&copy; 2026 PARALLAX AUDIO SYSTEM</div>
-        <div class="footer-sig">
-            <svg viewBox="0 0 240 70" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <path class="signature-path" d="M 30 54 L 30 16 M 30 18 C 48 10, 68 18, 52 34 C 40 44, 30 40, 30 40" stroke-width="4px" />
-                <path class="signature-path" d="M 66 38 C 74 34, 76 46, 84 46 C 92 46, 96 34, 100 34 C 104 34, 106 46, 114 46 C 122 46, 128 22, 134 22 L 128 46 C 132 46, 136 22, 142 22 L 136 46 C 144 46, 146 34, 154 34 C 158 34, 160 46, 168 46 C 174 46, 184 34, 190 40" stroke-width="4px" />
-            </svg>
+        <div class="grid-item">
+            <img src="Album 11.jpeg" alt="Album 11">
+            <p>Album 11</p>
         </div>
-        <div>ALL RIGHTS RESERVED</div>
-    </footer>
+        <div class="grid-item">
+            <img src="Album 10.jpeg" alt="Album 10">
+            <p>Album 10</p>
+        </div>
+    </div>
 
-    <!-- GENERATIVE AUDIO WAVE MICRO ENGINE -->
-    <script>
-        const canvas = document.getElementById('visualizer-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let mouseX = 0;
-            
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resize);
-            window.addEventListener('mousemove', (e) => { mouseX = e.clientX; });
-            resize();
+    <div class="button-container">
+        <a href="https://home1x.github.io/Store/" target="_blank" class="btn">Store</a>
+    </div>
 
-            let tick = 0;
-            function draw() {
-                tick += 0.015;
-                ctx.clearRect(0,0, canvas.width, canvas.height);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-                ctx.lineWidth = 1.5;
+    <div class="social-icons">
+        <a href="https://m.youtube.com/@parallax.x.x?ra=m" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.instagram.com/parallax.x.x?igsh=eTlnM20xZW5lcDUx&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/Parallax_x_x" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.tiktok.com/@parallax.x.x?_r=1&_t=ZT-94UGGvXVNug" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/Parallax.x.x.x.x/" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://discord.com/invite/rhXuzGvM6" target="_blank"><i class="fab fa-discord"></i></a>
+    </div>
 
-                // Render simulated frequency layers
-                for (let i = 0; i < 4; i++) {
-                    ctx.beginPath();
-                    let offset = i * 40;
-                    for (let x = 0; x < canvas.width; x += 10) {
-                        let dynamicAmp = 30 + (mouseX / canvas.width) * 50;
-                        let y = (canvas.height / 2) + Math.sin(x * 0.003 + tick + i) * Math.cos(x * 0.001 + tick) * dynamicAmp;
-                        if (x === 0) ctx.moveTo(x, y + offset - 60);
-                        else ctx.lineTo(x, y + offset - 60);
-                    }
-                    ctx.stroke();
-                }
-                requestAnimationFrame(draw);
-            }
-            draw();
-        }
-    </script>
 </body>
 </html>
