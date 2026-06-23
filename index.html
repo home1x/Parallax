@@ -28,7 +28,7 @@
     </script>
 
     <style>
-        /* --- CORE SYSTEM & PROPERTIES --- */
+        /* --- SYSTEM RESET --- */
         * {
             margin: 0;
             padding: 0;
@@ -42,26 +42,19 @@
 
         :root {
             --bg-deep: #050505;
-            --card-bg: rgba(12, 12, 12, 0.45);
-            --card-hover: rgba(20, 20, 20, 0.7);
-            --border-color: rgba(255, 255, 255, 0.07);
-            --border-hover: rgba(255, 255, 255, 0.2);
             --text-main: #ffffff;
-            --text-muted: #8e8e93;
+            --text-muted: #666666;
+            --border-mono: rgba(255, 255, 255, 0.1);
             --font-mono: 'Courier New', Courier, monospace;
-            --glow-color: rgba(255, 255, 255, 0.8);
         }
 
         body {
             background-color: var(--bg-deep);
             color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             overflow-x: hidden;
-            letter-spacing: -0.01em;
-            line-height: 1.5;
         }
 
-        /* --- BACKGROUND LAYER --- */
         #space-canvas {
             position: fixed;
             top: 0;
@@ -72,14 +65,12 @@
             pointer-events: none;
         }
 
-        /* --- TYPOGRAPHY & LINKS --- */
         a {
-            color: var(--text-main);
+            color: inherit;
             text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* --- SIGNATURE ELEMENT --- */
+        /* --- SIGNATURE ENGINE --- */
         .custom-signature-container {
             display: inline-flex;
             align-items: center;
@@ -88,504 +79,358 @@
 
         .signature-svg {
             overflow: visible;
-            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
-            transition: filter 0.3s ease;
         }
 
         .signature-path {
             fill: none;
             stroke: #ffffff;
-            stroke-width: 2.2px;
+            stroke-width: 2px;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
-        /* --- NAVIGATION --- */
-        header {
+        /* --- SPLIT ASYMMETRIC LAYOUT --- */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            min-height: 100vh;
+        }
+
+        /* --- FIXED LEFT CONTROL PANEL --- */
+        .left-panel {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 6%;
+            width: 400px;
+            height: 100vh;
+            border-right: 1px solid var(--border-mono);
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(5, 5, 5, 0.6);
+            padding: 40px;
+            z-index: 10;
+            background: rgba(5, 5, 5, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .logo-wrapper {
-            height: 32px;
-        }
-
-        nav {
+        .header-logo {
+            height: 35px;
             display: flex;
-            gap: 28px;
+            justify-content: flex-start;
         }
 
-        nav a {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .nav-menu a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-muted);
+            transition: color 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-main);
+            padding-left: 6px;
+        }
+
+        .panel-footer {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        nav a:hover {
-            color: var(--text-main);
-            text-shadow: 0 0 8px #ffffff;
-        }
-
-        /* --- HERO --- */
-        .hero {
-            position: relative;
-            min-height: 90vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 4%;
-            z-index: 2;
-        }
-
-        .hero-title-wrapper {
-            width: clamp(250px, 45vw, 500px);
-            animation: subtleFloat 6s ease-in-out infinite;
-        }
-
-        .hero-title-wrapper .signature-svg {
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
-        }
-
-        @keyframes subtleFloat {
-            0%, 100% { transform: translateY(0) rotate(-1deg); }
-            50% { transform: translateY(-8px) rotate(0.5deg); }
-        }
-
-        /* --- STRUCTURE LAYOUT --- */
-        .container {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 6% 120px 6%;
-            z-index: 2;
+        /* --- SCROLLING RIGHT CONTENT PANEL --- */
+        .right-panel {
+            grid-column-start: 2;
+            padding: 80px 6% 120px 6%;
+            max-width: 900px;
         }
 
         section {
             margin-bottom: 140px;
-            scroll-margin-top: 120px;
+            scroll-margin-top: 80px;
         }
 
-        .section-header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 14px;
-            margin-bottom: 45px;
-        }
-
-        .section-header h2 {
-            font-size: clamp(1.4rem, 3vw, 2.2rem);
-            font-weight: 300;
-            letter-spacing: 4px;
+        .section-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            color: var(--text-main);
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* --- ALBUMS SECTION (MINIMALIST GRID) --- */
-        .albums-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-mono);
         }
 
-        .album-card {
+        /* --- ALBUMS: THE EDITORIAL LIST --- */
+        .album-list-container {
             display: flex;
             flex-direction: column;
-            group-setProperty: relative;
         }
 
-        .album-art-container {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.02);
-            overflow: hidden;
-            margin-bottom: 18px;
+        .album-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border-mono);
             position: relative;
-            transition: border-color 0.4s ease;
+            cursor: pointer;
         }
 
-        .album-art {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .album-row:first-child {
+            border-top: 1px solid var(--border-mono);
         }
 
-        .album-card:hover .album-art-container {
-            border-color: var(--border-hover);
+        .album-index {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            width: 40px;
         }
 
-        .album-card:hover .album-art {
-            transform: scale(1.04);
-        }
-
-        .album-details h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            margin-bottom: 4px;
+        .album-title {
+            font-size: 1.4rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            flex-grow: 1;
+            font-weight: bold;
         }
 
-        .album-details p {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
+        .album-status {
+            font-size: 0.75rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* --- TOUR DESIGN --- */
-        .tour-table {
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 2px;
-            overflow: hidden;
+        /* Float image preview trick */
+        .album-preview-frame {
+            position: absolute;
+            right: 15%;
+            top: 50%;
+            transform: translateY(-50%) scale(0.8);
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ffffff;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 5;
         }
 
-        .tour-header-row {
-            display: grid;
-            grid-template-columns: 1.2fr 2fr 1.8fr 1.5fr 1fr;
-            padding: 18px 30px;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.01);
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            text-transform: uppercase;
+        .album-row:hover .album-preview-frame {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+            right: 18%;
         }
 
-        .tour-data-row {
+        .album-row:hover .album-title {
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* --- TOUR LIST --- */
+        .tour-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tour-item {
             display: grid;
-            grid-template-columns: 1.2fr 2fr 1.8fr 1.5fr 1fr;
-            padding: 26px 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            grid-template-columns: 120px 1.5fr 1fr 100px;
             align-items: center;
-        }
-
-        .tour-data-row:last-child {
-            border-bottom: none;
-        }
-
-        .tour-data-row:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .td-date {
-            font-family: var(--font-mono);
+            padding: 25px 0;
+            border-bottom: 1px solid var(--border-mono);
             font-size: 0.85rem;
-            font-weight: bold;
-            color: #ffffff;
         }
 
-        .td-venue {
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
+        .tour-item:first-child { border-top: 1px solid var(--border-mono); }
 
-        .td-location {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .td-lineup {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .tour-data-row:hover .td-lineup {
-            color: var(--text-main);
-        }
-
-        .td-action {
-            justify-self: end;
-            width: 100%;
-            max-width: 120px;
-        }
-
-        .tour-status {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            letter-spacing: 1.5px;
+        .tour-date { color: var(--text-main); font-weight: bold; }
+        .tour-venue { text-transform: uppercase; letter-spacing: 1px; }
+        .tour-loc { color: var(--text-muted); text-transform: uppercase; }
+        
+        .tour-btn {
+            font-size: 0.7rem;
             text-transform: uppercase;
-            padding: 10px 0;
-            width: 100%;
+            letter-spacing: 1px;
+            border: 1px solid var(--text-main);
+            padding: 6px 12px;
             text-align: center;
-            border: 1px solid var(--border-color);
-            background: rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
         }
 
-        .status-onsale {
-            border-color: var(--text-main);
-            color: var(--text-main);
+        .tour-btn:hover {
+            background: #ffffff;
+            color: #050505;
         }
 
-        .status-onsale:hover {
-            background: var(--text-main);
-            color: var(--bg-deep);
-            box-shadow: 0 0 12px rgba(255,255,255,0.25);
+        .tour-item.sold-out {
+            opacity: 0.3;
         }
-
-        .status-lowtickets {
-            border-color: #e6a100;
-            color: #e6a100;
-        }
-
-        .status-lowtickets:hover {
-            background: #e6a100;
-            color: var(--bg-deep);
-            box-shadow: 0 0 12px rgba(230,161,0,0.3);
-        }
-
-        .status-soldout {
+        .tour-item.sold-out .tour-btn {
             border-color: transparent;
-            color: rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.02);
             pointer-events: none;
             text-decoration: line-through;
         }
 
-        /* --- CONNECT LINK GRID --- */
-        .links-grid {
+        /* --- CONNECT BRUTALIST TILES --- */
+        .connect-matrix {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border-mono);
+            border: 1px solid var(--border-mono);
         }
 
-        .link-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 30px;
+        .connect-tile {
+            background: rgba(5,5,5,0.6);
+            padding: 35px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 150px;
+            min-height: 130px;
+            transition: background 0.2s ease;
         }
 
-        .link-card:hover {
-            border-color: var(--border-hover);
-            background: var(--card-hover);
+        .connect-tile:hover {
+            background: rgba(20,20,20,0.8);
         }
 
-        .link-card .platform-name {
+        .tile-label {
             font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
             text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .link-card .action-text {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 1px;
+        .tile-action {
+            font-size: 0.65rem;
             color: var(--text-muted);
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .link-card:hover .action-text {
-            color: var(--text-main);
+        /* --- THE BANNER BLOCK (STORE) --- */
+        .store-box {
+            border: 1px solid var(--border-mono);
+            background: rgba(255,255,255,0.01);
+            padding: 50px;
         }
 
-        /* --- IMMERSIVE BANNER (STORE) --- */
-        .store-banner {
-            background: linear-gradient(135deg, rgba(15,15,15,0.6) 0%, rgba(5,5,5,0.8) 100%), var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .store-banner::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; width: 150px; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.01));
-            pointer-events: none;
-        }
-
-        .store-banner h3 {
-            font-size: 1.8rem;
-            font-weight: 400;
+        .store-box h3 {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             margin-bottom: 15px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
         }
 
-        .store-banner p {
+        .store-box p {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            max-width: 550px;
-            line-height: 1.7;
+            font-size: 0.85rem;
+            line-height: 1.6;
             margin-bottom: 30px;
         }
 
-        .action-btn {
-            background: none;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            padding: 14px 35px;
-            font-size: 0.75rem;
-            font-family: var(--font-mono);
-            letter-spacing: 2px;
+        .store-link {
             display: inline-block;
+            border: 1px solid #ffffff;
+            padding: 12px 30px;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.2s ease;
         }
 
-        .action-btn:hover {
-            background: var(--text-main);
-            color: var(--bg-deep);
-            box-shadow: 0 0 15px rgba(255,255,255,0.2);
-        }
-
-        /* --- NEWSLETTER OVERHAUL --- */
-        .newsletter-section {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 50px;
-            backdrop-filter: blur(10px);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .newsletter-info h3 {
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .newsletter-info p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .newsletter-form {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .newsletter-form::after {
-            content: '';
-            position: absolute;
-            bottom: -1px; left: 0; width: 100%; height: 1px;
+        .store-link:hover {
             background: #ffffff;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
+            color: #050505;
         }
 
-        .newsletter-form:focus-within::after {
-            transform: scaleX(1);
+        /* --- NEWSLETTER LINE --- */
+        .newsletter-box {
+            border: 1px solid var(--border-mono);
+            padding: 40px;
         }
 
-        .newsletter-input {
+        .newsletter-box h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .newsletter-box p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 25px;
+        }
+
+        .input-row {
+            display: flex;
+            border-bottom: 1px solid #ffffff;
+        }
+
+        .input-row input {
             background: none;
             border: none;
             outline: none;
-            color: var(--text-main);
+            color: #ffffff;
             font-family: var(--font-mono);
-            font-size: 0.85rem;
-            padding: 15px 0;
+            padding: 12px 0;
             flex-grow: 1;
-            letter-spacing: 1px;
-            user-select: text;
+            font-size: 0.85rem;
         }
 
-        .newsletter-input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-        }
-
-        .newsletter-submit {
+        .input-row button {
             background: none;
             border: none;
-            color: var(--text-main);
+            color: #ffffff;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
             cursor: pointer;
-            padding: 10px 0 10px 20px;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 40px 6%;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            z-index: 2;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* --- ULTRALIGHT RESPONSIVE DESIGN --- */
-        @media (max-width: 1024px) {
-            .albums-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-            .links-grid { grid-template-columns: repeat(2, 1fr); }
-            .newsletter-section { grid-template-columns: 1fr; gap: 30px; }
-        }
-
-        @media (max-width: 900px) {
-            .tour-header-row { display: none; }
-            .tour-data-row {
-                grid-template-columns: 1fr;
-                gap: 6px;
-                padding: 24px 20px;
+        /* --- SCREEN BREAKPOINTS --- */
+        @media (max-width: 960px) {
+            .split-layout { grid-template-columns: 1fr; }
+            .left-panel {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-mono);
+                padding: 40px 6%;
             }
-            .td-action { justify-self: stretch; max-width: 100%; margin-top: 10px; }
+            .nav-menu { flex-direction: row; flex-wrap: wrap; gap: 20px; margin: 25px 0 0 0; }
+            .panel-footer { display: none; }
+            .right-panel { grid-column-start: 1; padding: 60px 6%; }
+            .album-preview-frame { display: none; }
         }
 
-        @media (max-width: 768px) {
-            header { padding: 1.2rem 6%; }
-            nav { display: none; }
-            .container { padding-bottom: 80px; }
-            section { margin-bottom: 90px; }
-            .store-banner { padding: 40px 25px; }
-            .newsletter-section { padding: 40px 25px; }
-        }
-        
-        @media (max-width: 480px) {
-            .albums-grid { grid-template-columns: 1fr; }
-            .links-grid { grid-template-columns: 1fr; gap: 1rem; }
+        @media (max-width: 640px) {
+            .tour-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 20px 0;
+            }
+            .tour-btn { width: 100%; }
+            .connect-matrix { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -593,188 +438,152 @@
 
     <canvas id="space-canvas"></canvas>
 
-    <header>
-        <div class="logo-wrapper custom-signature-container">
-            <svg class="signature-svg" viewBox="0 0 240 70" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <path class="signature-path" d="M 30 54 L 30 16 M 30 18 C 48 10, 68 18, 52 34 C 40 44, 30 40, 30 40" />
-                <path class="signature-path" d="M 66 38 C 74 34, 76 46, 84 46 C 92 46, 96 34, 100 34 C 104 34, 106 46, 114 46 C 122 46, 128 22, 134 22 L 128 46 C 132 46, 136 22, 142 22 L 136 46 C 144 46, 146 34, 154 34 C 158 34, 160 46, 168 46 C 174 46, 184 34, 190 40" />
-                <path class="signature-path" d="M 45 56 L 210 50" stroke-width="1.2px" opacity="0.85" />
-            </svg>
-        </div>
-        <nav>
-            <a href="#albums">Albums</a>
-            <a href="#tour">Tour</a>
-            <a href="#connect">Connect</a>
-            <a href="#store">Store</a>
-            <a href="#newsletter">Newsletter</a>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="hero-title-wrapper custom-signature-container">
-            <svg class="signature-svg" viewBox="0 0 240 70" width="100%" xmlns="http://www.w3.org/2000/svg">
-                <path class="signature-path" d="M 30 54 L 30 16 M 30 18 C 48 10, 68 18, 52 34 C 40 44, 30 40, 30 40" />
-                <path class="signature-path" d="M 66 38 C 74 34, 76 46, 84 46 C 92 46, 96 34, 100 34 C 104 34, 106 46, 114 46 C 122 46, 128 22, 134 22 L 128 46 C 132 46, 136 22, 142 22 L 136 46 C 144 46, 146 34, 154 34 C 158 34, 160 46, 168 46 C 174 46, 184 34, 190 40" />
-                <path class="signature-path" d="M 45 56 L 210 50" stroke-width="1.2px" opacity="0.85" />
-            </svg>
-        </div>
-    </section>
-
-    <main class="container">
-
-        <section id="albums">
-            <div class="section-header">
-                <h2>Albums</h2>
-            </div>
-            
-            <div class="albums-grid">
-                <div class="album-card">
-                    <div class="album-art-container">
-                        <img src="Album 8.png" alt="Project I Cover Art" class="album-art">
-                    </div>
-                    <div class="album-details">
-                        <h4>Project I</h4>
-                        <p>Coming soon</p>
-                    </div>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-art-container">
-                        <img src="Album 11.jpeg" alt="Project II Cover Art" class="album-art">
-                    </div>
-                    <div class="album-details">
-                        <h4>Project II</h4>
-                        <p>Coming soon</p>
-                    </div>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-art-container">
-                        <img src="Album 10.jpeg" alt="Project III Cover Art" class="album-art">
-                    </div>
-                    <div class="album-details">
-                        <h4>Project III</h4>
-                        <p>Coming soon</p>
-                    </div>
+    <div class="split-layout">
+        
+        <!-- LEFT NAVIGATION STATION -->
+        <aside class="left-panel">
+            <div class="header-logo">
+                <div class="custom-signature-container">
+                    <svg class="signature-svg" viewBox="0 0 240 70" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <path class="signature-path" d="M 30 54 L 30 16 M 30 18 C 48 10, 68 18, 52 34 C 40 44, 30 40, 30 40" />
+                        <path class="signature-path" d="M 66 38 C 74 34, 76 46, 84 46 C 92 46, 96 34, 100 34 C 104 34, 106 46, 114 46 C 122 46, 128 22, 134 22 L 128 46 C 132 46, 136 22, 142 22 L 136 46 C 144 46, 146 34, 154 34 C 158 34, 160 46, 168 46 C 174 46, 184 34, 190 40" />
+                        <path class="signature-path" d="M 45 56 L 210 50" stroke-width="1.2px" opacity="0.85" />
+                    </svg>
                 </div>
             </div>
-        </section>
 
-        <section id="tour">
-            <div class="section-header">
-                <h2>Tour Dates</h2>
+            <nav class="nav-menu">
+                <a href="#albums">01 // Albums</a>
+                <a href="#tour">02 // Tour Dates</a>
+                <a href="#connect">03 // Connect</a>
+                <a href="#store">04 // Store Line</a>
+                <a href="#newsletter">05 // Newsletter</a>
+            </nav>
+
+            <div class="panel-footer">
+                &copy; 2026 Parallax. All Rights Reserved.
             </div>
-            
-            <div class="tour-table">
-                <div class="tour-header-row">
-                    <div>Date</div>
-                    <div>Venue</div>
-                    <div>Location</div>
-                    <div>Lineup / Support</div>
-                    <div style="text-align: right;">Status</div>
-                </div>
+        </aside>
 
-                <div class="tour-data-row">
-                    <div class="td-date">OCT 14, 2026</div>
-                    <div class="td-venue">THE ROXY</div>
-                    <div class="td-location">LOS ANGELES, CA</div>
-                    <div class="td-lineup">SPECIAL GUESTS</div>
-                    <div class="td-action">
-                        <a href="#" target="_blank" class="tour-status status-onsale">Tickets</a>
+        <!-- RIGHT CONTENT DISPLAY -->
+        <main class="right-panel">
+
+            <section id="albums">
+                <div class="section-title">Catalogue</div>
+                <div class="album-list-container">
+                    
+                    <div class="album-row">
+                        <span class="album-index">01</span>
+                        <span class="album-title">Project I</span>
+                        <span class="album-status">Coming Soon</span>
+                        <img src="Album 8.png" alt="Preview" class="album-preview-frame">
                     </div>
-                </div>
 
-                <div class="tour-data-row">
-                    <div class="td-date">OCT 18, 2026</div>
-                    <div class="td-venue">BOWERY BALLROOM</div>
-                    <div class="td-location">NEW YORK, NY</div>
-                    <div class="td-lineup">SPECIAL GUESTS</div>
-                    <div class="td-action">
-                        <a href="#" target="_blank" class="tour-status status-lowtickets">Low Tickets</a>
+                    <div class="album-row">
+                        <span class="album-index">02</span>
+                        <span class="album-title">Project II</span>
+                        <span class="album-status">Coming Soon</span>
+                        <img src="Album 11.jpeg" alt="Preview" class="album-preview-frame">
                     </div>
-                </div>
 
-                <div class="tour-data-row">
-                    <div class="td-date">OCT 22, 2026</div>
-                    <div class="td-venue">THE LIGHTHOUSE</div>
-                    <div class="td-location">LONDON, UK</div>
-                    <div class="td-lineup">SPECIAL GUESTS</div>
-                    <div class="td-action">
-                        <span class="tour-status status-soldout">Sold Out</span>
+                    <div class="album-row">
+                        <span class="album-index">03</span>
+                        <span class="album-title">Project III</span>
+                        <span class="album-status">Coming Soon</span>
+                        <img src="Album 10.jpeg" alt="Preview" class="album-preview-frame">
                     </div>
+
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="connect">
-            <div class="section-header">
-                <h2>Connect</h2>
-            </div>
+            <section id="tour">
+                <div class="section-title">Live Performance</div>
+                <div class="tour-list">
+                    
+                    <div class="tour-item">
+                        <div class="tour-date">10/14/2026</div>
+                        <div class="tour-venue">The Roxy</div>
+                        <div class="tour-loc">Los Angeles, CA</div>
+                        <a href="#" target="_blank" class="tour-btn">Tickets</a>
+                    </div>
 
-            <div class="links-grid">
-                <a href="https://www.instagram.com/parallax.x.x?igsh=eTlnM20xZW5lcDUx&utm_source=qr" target="_blank" class="link-card">
-                    <div class="platform-name">Instagram</div>
-                    <div class="action-text">View Profile ↗</div>
-                </a>
+                    <div class="tour-item">
+                        <div class="tour-date">10/18/2026</div>
+                        <div class="tour-venue">Bowery Ballroom</div>
+                        <div class="tour-loc">New York, NY</div>
+                        <a href="#" target="_blank" class="tour-btn">Tickets</a>
+                    </div>
 
-                <a href="https://m.youtube.com/@parallax.x.x?ra=m" target="_blank" class="link-card">
-                    <div class="platform-name">YouTube</div>
-                    <div class="action-text">Subscribe ↗</div>
-                </a>
+                    <div class="tour-item sold-out">
+                        <div class="tour-date">10/22/2026</div>
+                        <div class="tour-venue">The Lighthouse</div>
+                        <div class="tour-loc">London, UK</div>
+                        <a href="#" class="tour-btn">Sold Out</a>
+                    </div>
 
-                <a href="https://x.com/Parallax_x_x" target="_blank" class="link-card">
-                    <div class="platform-name">X.com</div>
-                    <div class="action-text">Follow Feed ↗</div>
-                </a>
+                </div>
+            </section>
 
-                <a href="https://www.tiktok.com/@parallax.x.x?_r=1&_t=ZT-94UGGvXVNug" target="_blank" class="link-card">
-                    <div class="platform-name">TikTok</div>
-                    <div class="action-text">Watch Content ↗</div>
-                </a>
+            <section id="connect">
+                <div class="section-title">Network Hub</div>
+                <div class="connect-matrix">
+                    
+                    <a href="https://www.instagram.com/parallax.x.x?igsh=eTlnM20xZW5lcDUx&utm_source=qr" target="_blank" class="connect-tile">
+                        <div class="tile-label">Instagram</div>
+                        <div class="tile-action">Link Portal ↗</div>
+                    </a>
 
-                <a href="https://www.facebook.com/Parallax.x.x.x.x/" target="_blank" class="link-card">
-                    <div class="platform-name">Facebook</div>
-                    <div class="action-text">Join Space ↗</div>
-                </a>
+                    <a href="https://m.youtube.com/@parallax.x.x?ra=m" target="_blank" class="connect-tile">
+                        <div class="tile-label">YouTube</div>
+                        <div class="tile-action">Link Portal ↗</div>
+                    </a>
 
-                <a href="https://discord.com/invite/rhXuzGvM6" target="_blank" class="link-card">
-                    <div class="platform-name">The Network</div>
-                    <div class="action-text">Enter Portal ↗</div>
-                </a>
-            </div>
-        </section>
+                    <a href="https://x.com/Parallax_x_x" target="_blank" class="connect-tile">
+                        <div class="tile-label">X.com</div>
+                        <div class="tile-action">Link Portal ↗</div>
+                    </a>
 
-        <section id="store" class="store-banner">
-            <h3>Curated Store</h3>
-            <p>
-                Access premium garments, unique physical music pressings, and official capsule merchandise direct from the curated Parallax line.
-            </p>
-            <a href="https://home1x.github.io/Store/" target="_blank" class="action-btn">Shop Collection →</a>
-        </section>
+                    <a href="https://www.tiktok.com/@parallax.x.x?_r=1&_t=ZT-94UGGvXVNug" target="_blank" class="connect-tile">
+                        <div class="tile-label">TikTok</div>
+                        <div class="tile-action">Link Portal ↗</div>
+                    </a>
 
-        <section id="newsletter" class="newsletter-section">
-            <div class="newsletter-info">
-                <h3>Newsletter</h3>
-                <p>Subscribe to receive deep updates, exclusive priority product drops, and early tour ticket access options.</p>
-            </div>
-            <form action="#" method="POST" class="newsletter-form">
-                <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address" required autocomplete="off">
-                <button type="submit" class="newsletter-submit">Submit ↗</button>
-            </form>
-        </section>
+                    <a href="https://www.facebook.com/Parallax.x.x.x.x/" target="_blank" class="connect-tile">
+                        <div class="tile-label">Facebook</div>
+                        <div class="tile-action">Link Portal ↗</div>
+                    </a>
 
-    </main>
+                    <a href="https://discord.com/invite/rhXuzGvM6" target="_blank" class="connect-tile">
+                        <div class="tile-label">Discord</div>
+                        <div class="tile-action">Link Portal ↗</div>
+                    </a>
 
-    <footer>
-        &copy; 2026 
-        <span class="custom-signature-container" style="height: 14px; vertical-align: middle; margin: 0 6px;">
-            <svg class="signature-svg" viewBox="0 0 240 70" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <path class="signature-path" d="M 30 54 L 30 16 M 30 18 C 48 10, 68 18, 52 34 C 40 44, 30 40, 30 40" stroke-width="3.5px" />
-                <path class="signature-path" d="M 66 38 C 74 34, 76 46, 84 46 C 92 46, 96 34, 100 34 C 104 34, 106 46, 114 46 C 122 46, 128 22, 134 22 L 128 46 C 132 46, 136 22, 142 22 L 136 46 C 144 46, 146 34, 154 34 C 158 34, 160 46, 168 46 C 174 46, 184 34, 190 40" stroke-width="3.5px" />
-                <path class="signature-path" d="M 45 56 L 210 50" stroke-width="2px" opacity="0.85" />
-            </svg>
-        </span>. All Rights Reserved.
-    </footer>
+                </div>
+            </section>
+
+            <section id="store">
+                <div class="section-title">Supply</div>
+                <div class="store-box">
+                    <h3>Official Archive Store</h3>
+                    <p>Access exceptional apparel pieces, tangible music drops, and unique curated items produced directly by Parallax.</p>
+                    <a href="https://home1x.github.io/Store/" target="_blank" class="store-link">Enter Shop →</a>
+                </div>
+            </section>
+
+            <section id="newsletter">
+                <div class="section-title">Transmission</div>
+                <div class="newsletter-box">
+                    <h3>Direct Mail List</h3>
+                    <p>Sign up to receive immediate notifications regarding creative projects and priority event bookings.</p>
+                    <form action="#" method="POST" class="input-row">
+                        <input type="email" placeholder="YOUR EMAIL ADDRESS" required autocomplete="off">
+                        <button type="submit">Submit ↗</button>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
 
     <script>
         const canvas = document.getElementById('space-canvas');
@@ -790,27 +599,25 @@
 
             function initStars() {
                 stars = [];
-                const count = Math.floor((canvas.width * canvas.height) / 9000);
+                const count = Math.floor((canvas.width * canvas.height) / 8500);
                 for(let i = 0; i < count; i++) {
                     stars.push({
                         x: Math.random() * canvas.width,
                         y: Math.random() * canvas.height,
-                        radius: Math.random() * 1.2,
+                        radius: Math.random() * 1.3,
                         alpha: Math.random(),
-                        speed: 0.01 + Math.random() * 0.02
+                        speed: 0.008 + Math.random() * 0.015
                     });
                 }
             }
 
             function draw() {
-                // Clear and build the precise radial dark background context layer
                 let gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, Math.max(canvas.width, canvas.height));
                 gradient.addColorStop(0, '#111111');
                 gradient.addColorStop(1, '#050505');
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Animate fine twinkling stars
                 for(let i = 0; i < stars.length; i++) {
                     let s = stars[i];
                     s.alpha += s.speed;
