@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parallax</title>
-    <!-- Tailwind CSS for sleek layout -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom Liquid Glass (Glassmorphism) Effect */
@@ -43,24 +42,21 @@
 </head>
 <body class="bg-black text-white font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden">
 
-    <!-- Interactive Galaxy Background Canvas -->
     <canvas id="galaxyCanvas" class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-auto"></canvas>
 
-    <!-- Navigation Header -->
-    <header class="fixed top-0 left-0 w-full z-50 px-6 py-4">
-        <nav class="max-w-7xl mx-auto flex justify-between items-center liquid-glass rounded-full px-8 py-3">
-            <a href="#" class="text-xl font-bold tracking-[0.3em] uppercase hover:opacity-70 transition style="font-family: 'Brush Script MT', cursive; text-transform: none; letter-spacing: normal;">Parallax</a>
+    <header class="fixed top-0 left-0 w-full z-50 px-6 py-2">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center liquid-glass rounded-full px-8 py-1.5">
+            <a href="#" class="text-xl font-bold tracking-[0.3em] uppercase hover:opacity-70 transition" style="font-family: 'Brush Script MT', cursive; text-transform: none; letter-spacing: normal;">Parallax</a>
             <div class="hidden md:flex space-x-8 text-xs tracking-[0.2em] uppercase font-light">
                 <a href="#albums" class="hover:text-gray-400 transition">Albums</a>
                 <a href="#tour" class="hover:text-gray-400 transition">Tour</a>
                 <a href="#store" class="hover:text-gray-400 transition">Store</a>
                 <a href="#connect" class="hover:text-gray-400 transition">Connect</a>
             </div>
-            <a href="#newsletter" class="text-xs tracking-[0.2em] uppercase bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-gray-200 transition">Join Cult</a>
+            <a href="#newsletter" class="text-xs tracking-[0.2em] uppercase bg-white text-black px-4 py-1.5 rounded-full font-medium hover:bg-gray-200 transition">Join</a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
         <div class="space-y-4 max-w-3xl">
             <p class="text-xs tracking-[0.5em] uppercase text-gray-400">New Audio Experience</p>
@@ -78,7 +74,6 @@
         </div>
     </section>
 
-    <!-- Albums Section -->
     <section id="albums" class="py-32 px-6 max-w-7xl mx-auto">
         <div class="mb-16">
             <p class="text-xs tracking-[0.4em] uppercase text-gray-500 mb-2">// Discography</p>
@@ -86,10 +81,8 @@
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <!-- Album 1 -->
             <div class="liquid-glass p-6 rounded-3xl group cursor-pointer">
                 <div class="aspect-square w-full bg-gradient-to-tr from-black via-zinc-900 to-zinc-700 rounded-2xl mb-6 overflow-hidden relative flex items-center justify-center border border-zinc-800">
-                    <!-- Stunning abstract graphic representation -->
                     <div class="w-48 h-48 rounded-full border border-white/20 animate-spin" style="animation-duration: 20s;"></div>
                     <div class="absolute w-32 h-32 rounded-full border border-white/40 animate-ping" style="animation-duration: 4s;"></div>
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-all duration-500"></div>
@@ -103,10 +96,8 @@
                 </div>
             </div>
 
-            <!-- Album 2 -->
             <div class="liquid-glass p-6 rounded-3xl group cursor-pointer">
                 <div class="aspect-square w-full bg-gradient-to-br from-zinc-800 via-black to-zinc-900 rounded-2xl mb-6 overflow-hidden relative flex items-center justify-center border border-zinc-800">
-                    <!-- Stunning abstract graphic representation -->
                     <div class="w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-b-[100px] border-b-white/10 group-hover:border-b-white/30 transition-all duration-700"></div>
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-all duration-500"></div>
                 </div>
@@ -121,7 +112,6 @@
         </div>
     </section>
 
-    <!-- Tour Section -->
     <section id="tour" class="py-32 px-6 bg-zinc-950/40 border-y border-zinc-900/50">
         <div class="max-w-7xl mx-auto">
             <div class="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end">
@@ -133,7 +123,6 @@
             </div>
 
             <div class="space-y-4">
-                <!-- Tour Dates Loop -->
                 <div class="liquid-glass p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4">
                     <div class="text-center md:text-left">
                         <span class="text-xs tracking-widest text-gray-400 block mb-1">OCT 14</span>
@@ -164,7 +153,6 @@
         </div>
     </section>
 
-    <!-- Store Section -->
     <section id="store" class="py-32 px-6 max-w-7xl mx-auto">
         <div class="mb-16">
             <p class="text-xs tracking-[0.4em] uppercase text-gray-500 mb-2">// Supply</p>
@@ -172,7 +160,6 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Product 1 -->
             <div class="liquid-glass p-4 rounded-2xl group flex flex-col justify-between">
                 <div>
                     <div class="aspect-[4/5] w-full bg-zinc-900 rounded-xl mb-4 relative overflow-hidden flex items-center justify-center border border-zinc-800">
@@ -186,7 +173,6 @@
                 <button class="w-full mt-6 text-xs tracking-widest uppercase border border-white/20 py-3 rounded-xl hover:bg-white hover:text-black transition">Add to Cart</button>
             </div>
 
-            <!-- Product 2 -->
             <div class="liquid-glass p-4 rounded-2xl group flex flex-col justify-between">
                 <div>
                     <div class="aspect-[4/5] w-full bg-zinc-900 rounded-xl mb-4 relative overflow-hidden flex items-center justify-center border border-zinc-800">
@@ -200,7 +186,6 @@
                 <button class="w-full mt-6 text-xs tracking-widest uppercase border border-white/20 py-3 rounded-xl hover:bg-white hover:text-black transition">Add to Cart</button>
             </div>
 
-            <!-- Product 3 -->
             <div class="liquid-glass p-4 rounded-2xl group flex flex-col justify-between">
                 <div>
                     <div class="aspect-[4/5] w-full bg-zinc-900 rounded-xl mb-4 relative overflow-hidden flex items-center justify-center border border-zinc-800">
@@ -215,11 +200,9 @@
         </div>
     </section>
 
-    <!-- Connect & Newsletter Section Grid -->
     <section class="py-32 px-6 max-w-7xl mx-auto border-t border-zinc-900/50">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             
-            <!-- Newsletter -->
             <div id="newsletter" class="liquid-glass p-8 md:p-12 rounded-3xl flex flex-col justify-between">
                 <div>
                     <h3 class="text-2xl font-bold tracking-wider uppercase mb-2">Newsletter</h3>
@@ -233,7 +216,6 @@
                 </form>
             </div>
 
-            <!-- Connect Links -->
             <div id="connect" class="liquid-glass p-8 md:p-12 rounded-3xl flex flex-col justify-between">
                 <div>
                     <h3 class="text-2xl font-bold tracking-wider uppercase mb-2">Connect</h3>
@@ -250,12 +232,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-12 text-center text-[10px] tracking-[0.3em] text-gray-600">
         © Parallax | all rights reserved
     </footer>
 
-    <!-- Interactive Galaxy Background Script -->
     <script>
         const canvas = document.getElementById('galaxyCanvas');
         const ctx = canvas.getContext('2d');
